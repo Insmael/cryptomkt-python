@@ -21,7 +21,7 @@ class Socket(object):
         self.board_data = dict()
 
         self.socketids = socketids
-        sio =  socketio.Client()
+        sio = socketio.Client()
 
         @sio.event
         def connect():

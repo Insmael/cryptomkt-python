@@ -340,7 +340,7 @@ class Client(object):
 
 
     def create_order(self, market, amount, price, side, type):
-        """creates an orders from the specified argument.
+        """creates an orders from the specified arguments.
 
         Authentication is requiered.
 
@@ -348,10 +348,12 @@ class Client(object):
             amount: The amount of crypto to be buyed or selled.
             market: A market pair as a string. Is the specified market to place the order in
                 e.g: 'ETHCLP'.
-            price: The price to ask or bid for one unit of crypto
             side: 'buy' or 'sell' the crypto
-            type: market, limit, stop_limit
-        
+            type: "market", "limit" or "stop_limit"
+        Optional Arguments:
+            price: The price to ask or bid for each crypto unit, required only if "type" is "limit" or "stop-limit".
+            limit: Required only if type is "stop-limit".
+            
         https://developers.cryptomkt.com/?python#crear-orden
         """
         params = dict(
@@ -542,7 +544,7 @@ class Client(object):
     def notify_withdrawal(self, amount, bank_account):
         """notify_withdrawal(amount, bank_account) -> APIObject
         
-        This method notifies a withdrawal froma local currency wallet
+        This method notifies a withdrawal from a local currency wallet
 
         List of arguments:
                 Required: amount (string), bank_account (string)
@@ -557,7 +559,7 @@ class Client(object):
         response = self._post(self.API_VERSION, "request", "withdrawal", data = params)
         return self._make_api_object(response, APIObject)
 
-    def transfer(self,address, amount, currecy, memo = None):
+    def transfer(self,address, amount, currency, memo = None):
         """transfer(addres, amount, currency, **kwargs) -> APIObject
         
         This method tranfers cryptocurrencies to another wallet
