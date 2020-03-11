@@ -349,12 +349,9 @@ class Client(object):
             market: A market pair as a string. Is the specified market to place the order in
                 e.g: 'ETHCLP'.
             side: 'buy' or 'sell' the crypto
-            type: "market", "limit" or "stop_limit"
-        Optional Arguments:
-            price: The price to ask or bid for each crypto unit, required only if "type" is "limit" or "stop-limit".
-            limit: Required only if type is "stop-limit".
-            
-        https://developers.cryptomkt.com/?python#crear-orden
+            type: one of the keywords 'market', 'limit', 'stop_limit'
+        
+        https://developers.cryptomkt.com/#crear-orden
         """
         params = dict(
             amount=amount,
@@ -368,14 +365,18 @@ class Client(object):
         return self._make_api_object(response, Order)
 
 
-    def get_status_order(self, id):
+    def get_order_status(self, id):
         """returns the status of an order, given the order id.
-
-
-        https://developers.cryptomkt.com/?python#estado-de-orden
+        
+        Authentication is requiered.
+        
+        Required Arguments:
+            id (str): The identification of the order.
+        
+        https://developers.cryptomkt.com/#estado-de-orden
         """
         params = dict(
-            id_=id
+            id=id
         )
 
         response = self._get(self.API_VERSION, 'orders', 'status', params=params)
@@ -383,7 +384,7 @@ class Client(object):
 
 
     def cancel_order(self, id):
-        """cancel_order(id_) -> Order
+        """cancel_order(id) -> Order
         
         This method cancels an order.
 
@@ -391,13 +392,13 @@ class Client(object):
         order.cancel_order()["fieldYouWant"]
 
         List of arguments:
-                Required: id_ (string)
+                Required: id (string)
                 This method does not accept any optional args.
 
-        https://developers.cryptomkt.com/?python#cancelar-una-orden
+        https://developers.cryptomkt.com/#cancelar-una-orden
         """
         params = dict(
-            id_=id
+            id=id
         )
 
         response = self._post(self.API_VERSION, 'orders', 'cancel', data=params)
@@ -482,7 +483,7 @@ class Client(object):
 
         This method does not require any args.
 
-        https://developers.cryptomkt.com/?python#obtener-balance
+        https://developers.cryptomkt.com/#obtener-balance
         """
 
         response = self._get(self.API_VERSION, 'balance')
