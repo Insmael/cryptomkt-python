@@ -539,7 +539,7 @@ class Client(object):
         if voucher is not None:
             params["voucher"] = voucher
         
-        response = self._post(self.API_VERSION,"request", "deposit", data = params)
+        response = self._post(self.API_VERSION, "deposit", data = params)
         return self._make_api_object(response,APIObject)
 
     def notify_withdrawal(self, amount, bank_account):
@@ -557,7 +557,7 @@ class Client(object):
             amount = amount,
             bank_account = bank_account
         )
-        response = self._post(self.API_VERSION, "request", "withdrawal", data = params)
+        response = self._post(self.API_VERSION, "withdrawal", data = params)
         return self._make_api_object(response, APIObject)
 
     def transfer(self,address, amount, currency, memo = None):

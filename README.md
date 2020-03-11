@@ -472,7 +472,10 @@ client.notify_deposit(bank_account="12345", amount="10000")
 
 ***Expected Output***
 ```python
-{ status: 'success', data: '' }
+{
+  "data": "",
+  "pagination": null
+}
 ```
 
 ### Notify Withdrawal
@@ -484,7 +487,10 @@ client.notify_withdrawal(bank_account="12345", amount="10000")
 
 ***Expected Output***
 ```python
-{ status: 'success', data: '' }
+{
+  "data": "",
+  "pagination": null
+}
 ```
 ### Transfer
 ```python
